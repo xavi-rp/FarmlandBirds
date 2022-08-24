@@ -290,6 +290,20 @@ data
 sps <- fbi_sps$V2
 sps
 
+## Gisco maps
+# https://ropengov.github.io/giscoR/
+#eur_gisco <- gisco_get_countries(region = "Europe")
+#eur_gisco <- gisco_get_countries(region = c("Europe", "Africa", "Asia"))
+eur_gisco_eur <- gisco_get_countries(region = "Europe")
+eur_gisco_tur <- gisco_get_countries(country = c("Turkey", "Georgia", "Armenia", "Azerbaijan"))
+eur_gisco <- st_union(eur_gisco_eur, eur_gisco_tur)
+                                     
+eur_gisco <- st_crop(eur_gisco, xmin = -10.5, xmax = 50, ymin = 33, ymax = 72)
+
+#ggplot() + geom_sf(data = eur_gisco_tur)
+#ggplot() + geom_sf(data = eur_gisco)
+
+
 
 ### Combined map ####
 
@@ -312,12 +326,6 @@ for (sp in sps){
   
   #data_sp <- data_sp[year > 1999, ]
   sort(unique(data_sp$year))
-  
-  
-  ## Gisco maps
-  # https://ropengov.github.io/giscoR/
-  eur_gisco <- gisco_get_countries(region = "Europe")
-  eur_gisco <- st_crop(eur_gisco, xmin = -10.5, xmax = 50, ymin = 33, ymax = 72)
   
 
   data_sp <- arrange(data_sp, month)
@@ -498,12 +506,6 @@ for (sp in sps){
   
   #data_sp <- data_sp[year > 1999, ]
   sort(unique(data_sp$year))
-  
-  
-  ## Gisco maps
-  # https://ropengov.github.io/giscoR/
-  eur_gisco <- gisco_get_countries(region = "Europe")
-  eur_gisco <- st_crop(eur_gisco, xmin = -10.5, xmax = 50, ymin = 33, ymax = 72)
   
   
   data_sp <- arrange(data_sp, month)
